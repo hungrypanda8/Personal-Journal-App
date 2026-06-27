@@ -4,3 +4,8 @@ DESIGN.md
 BUILD_GUIDE.md
 .venv/
 .claude/
+
+# Phase 1 — dependencies, secrets, and local database
+node_modules/
+.env
+*.db

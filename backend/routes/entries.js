@@ -5,6 +5,16 @@ const router = express.Router();
 const db = require("../database");
 const getWeather = require("../weather");
 
+// capitalizeFirst — return the string with its first letter uppercased, if not already.
+function capitalizeFirst(text) {
+  // Guard against empty / non-string values so we never touch unexpected input.
+  if (typeof text !== "string" || text.length === 0) {
+    return text;
+  }
+  // Only change the very first character; leave the rest of the string untouched.
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 // POST /api/entries — create a new journal entry (title and content required).
 router.post("/", async (req, res) => {
   try {
@@ -15,6 +25,10 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Title and content are required" });
     }
 
+    // Auto-capitalize the first letter of the title and content before saving.
+    const entryTitle = capitalizeFirst(title);
+    const entryContent = capitalizeFirst(content);
+
     // Fetch the current weather BEFORE saving so it can be tagged onto the entry.
     const { weather, temperature } = await getWeather();
 
@@ -22,7 +36,7 @@ router.post("/", async (req, res) => {
     const insert = db.prepare(
       "INSERT INTO entries (title, content, mood, weather, temperature) VALUES (?, ?, ?, ?, ?)"
     );
-    const result = insert.run(title, content, mood || "neutral", weather, temperature);
+    const result = insert.run(entryTitle, entryContent, mood || "neutral", weather, temperature);
 
     // Fetch and return the freshly created entry with its generated id.
     const newEntry = db

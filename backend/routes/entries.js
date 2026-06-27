@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../database");
+const getWeather = require("../weather");
 
 // POST /api/entries — create a new journal entry (title and content required).
 router.post("/", async (req, res) => {
@@ -14,11 +15,14 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Title and content are required" });
     }
 
+    // Fetch the current weather BEFORE saving so it can be tagged onto the entry.
+    const { weather, temperature } = await getWeather();
+
     // Insert the new entry; mood defaults to "neutral" when not provided.
     const insert = db.prepare(
-      "INSERT INTO entries (title, content, mood) VALUES (?, ?, ?)"
+      "INSERT INTO entries (title, content, mood, weather, temperature) VALUES (?, ?, ?, ?, ?)"
     );
-    const result = insert.run(title, content, mood || "neutral");
+    const result = insert.run(title, content, mood || "neutral", weather, temperature);
 
     // Fetch and return the freshly created entry with its generated id.
     const newEntry = db

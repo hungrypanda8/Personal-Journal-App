@@ -1,1 +1,219 @@
-/* style.css — App styling. Placeholder for Phase 1; built in Phase 3. */
+/* ── 1. Reset & Base ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f5f5f0;        /* Background: warm off-white */
+  color: #2c2c2c;            /* Text Main */
+  font-family: Arial, sans-serif;
+  font-size: 14px;           /* Body Text */
+  line-height: 1.6;
+}
+
+/* ── 2. Page Layout ── */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;           /* 20px side padding */
+}
+
+/* ── 3. Header ── */
+header {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px 30px;   /* top 40px, bottom 30px */
+  text-align: center;
+}
+
+header h1 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c2c2c;            /* Text Main */
+}
+
+header .subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 12px;           /* Subtle Text */
+  color: #888888;            /* Text Subtle */
+  margin-top: 8px;
+}
+
+/* ── 4. Form Card ── */
+.card {
+  background: #ffffff;       /* Surface */
+  border: 1px solid #e0e0e0; /* Border */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Shadow */
+}
+
+.form-card {
+  padding: 24px;             /* 24px on all sides */
+  margin-bottom: 32px;       /* Form margin-bottom */
+}
+
+/* ── 5. Form Inputs ── */
+.form-card label {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 12px;           /* Subtle Text */
+  color: #888888;            /* Text Subtle */
+  margin-bottom: 8px;        /* 8px below each label, above each input */
+}
+
+#title-input,
+#mood-select,
+#content-input {
+  width: 100%;
+  border: 1px solid #e0e0e0; /* Border */
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;           /* Body Text */
+  color: #2c2c2c;            /* Text Main */
+  margin-bottom: 16px;
+}
+
+#content-input {
+  height: 140px;             /* Textarea height */
+  resize: vertical;          /* Resize only vertically */
+}
+
+/* Focus outline in primary green */
+#title-input:focus,
+#mood-select:focus,
+#content-input:focus {
+  outline: 2px solid #4a7c59; /* Primary */
+}
+
+/* ── 6. Save Button ── */
+#save-btn {
+  display: block;
+  margin-left: auto;         /* Right-aligned */
+  background: #4a7c59;       /* Primary green */
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;         /* Button Text bold */
+  padding: 10px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#save-btn:hover {
+  background: #3d6b4a;       /* Slightly darker green */
+}
+
+/* ── 7. Section Divider ── */
+.section-divider {
+  margin: 32px 0;
+}
+
+.section-divider span {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #888888;            /* Text Subtle */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.section-divider hr {
+  border: none;
+  border-top: 1px solid #e0e0e0; /* Border, thin and light */
+}
+
+/* ── 8. Entry Cards ── */
+.entry-card {
+  background: #ffffff;       /* Surface */
+  border: 1px solid #e0e0e0; /* Border */
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;       /* Card margin-bottom */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); /* Shadow */
+}
+
+/* Row 1 — Title Row */
+.entry-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entry-title-row .entry-title {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #2c2c2c;            /* Text Main */
+}
+
+.entry-title-row .mood-emoji {
+  font-size: 18px;           /* Mood emoji large */
+  margin-right: 6px;
+}
+
+.entry-title-row .entry-date {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #888888;            /* Text Subtle */
+  white-space: nowrap;
+}
+
+/* Row 2 — Weather Row */
+.entry-weather {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #888888;            /* Text Subtle */
+  margin-top: 4px;
+}
+
+/* Row 3 — Content Preview */
+.entry-content {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #2c2c2c;            /* Text Main */
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+/* Row 4 — Actions Row */
+.entry-actions {
+  text-align: right;
+  margin-top: 8px;
+}
+
+/* ── 9. Delete Button ── */
+.delete-btn {
+  background: #c0392b;       /* Danger red */
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #a93226;       /* Darker red */
+}
+
+/* ── 10. Empty State ── */
+.empty-state {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  color: #888888;            /* Text Subtle */
+  padding: 24px;
+}
+
+.empty-state .empty-emoji {
+  display: block;
+  font-size: 32px;           /* Emoji at 32px above the text */
+  margin-bottom: 8px;
+}

@@ -1,1 +1,65 @@
-<!-- index.html — Main UI page. Placeholder for Phase 1; built in Phase 3. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Personal Journal</title>
+  <!-- Link to the stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Page Header -->
+  <header>
+    <h1>📔 My Personal Journal</h1>
+    <p class="subtitle">Your private space to write, reflect, and grow.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Section 1: New Entry Form -->
+    <section id="new-entry-section">
+      <div class="card form-card">
+
+        <!-- Title input -->
+        <label for="title-input">Title</label>
+        <input type="text" id="title-input" placeholder="Give your entry a title..." />
+
+        <!-- Mood dropdown -->
+        <label for="mood-select">Mood</label>
+        <select id="mood-select">
+          <option value="happy">😊 Happy</option>
+          <option value="neutral" selected>😐 Neutral</option>
+          <option value="sad">😢 Sad</option>
+        </select>
+
+        <!-- Content textarea -->
+        <label for="content-input">What's on your mind?</label>
+        <textarea id="content-input" placeholder="Write your journal entry here..."></textarea>
+
+        <!-- Save button -->
+        <button id="save-btn">💾 Save Entry</button>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider">
+      <span>Past Entries</span>
+      <hr />
+    </div>
+
+    <!-- Section 2: Entries List -->
+    <section id="entries-section">
+      <!-- Entry cards will be injected here by app.js -->
+      <!-- OR the empty state message if no entries -->
+    </section>
+
+  </main>
+
+  <!-- Link to app.js at the bottom -->
+  <script src="app.js"></script>
+
+</body>
+</html>

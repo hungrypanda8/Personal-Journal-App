@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 // Import the entries router that holds all /api/entries routes.
 const entriesRouter = require("./routes/entries");
@@ -22,8 +23,11 @@ app.use(cors());
 // Parse incoming JSON request bodies automatically.
 app.use(express.json());
 
-// Health-check route: confirms the server is up and reachable.
-app.get("/", (req, res) => {
+// Serve the frontend folder as static files so the app opens at http://localhost:3000.
+app.use(express.static(path.join(__dirname, "..", "frontend")));
+
+// Health-check route: confirms the API is up (frontend now lives at "/").
+app.get("/health", (req, res) => {
   res.json({ message: "Journal API is running" });
 });
 

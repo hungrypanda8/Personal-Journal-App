@@ -7,6 +7,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+// Import the entries router that holds all /api/entries routes.
+const entriesRouter = require("./routes/entries");
+
 // Create the Express application instance.
 const app = express();
 
@@ -23,6 +26,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Journal API is running" });
 });
+
+// Mount the journal entry routes under the /api/entries path.
+app.use("/api/entries", entriesRouter);
 
 // Start the server and log the port it is listening on.
 app.listen(PORT, () => {

@@ -1,4 +1,37 @@
-/* ── 1. Reset & Base ── */
+/* ==========================================================================
+   style.css — How the page LOOKS (Study Plan: Stop 7 — skim only)
+   ==========================================================================
+
+   WHAT IS CSS?
+     CSS (Cascading Style Sheets) controls appearance — colors, fonts, spacing,
+     sizes, layout. It does NOT affect how the app WORKS, only how it looks. As a
+     beginner you can skim this file; come back when you're curious about styling.
+
+   HOW IT WORKS (the only rule you need):
+     CSS is a list of rules. Each rule has a SELECTOR (which elements to style) and
+     a block of property: value; declarations (what to change). Selectors:
+       • tag name   →  body { ... }        styles every <body>
+       • .class     →  .card { ... }       styles every element with class="card"
+       • #id        →  #save-btn { ... }   styles the single element id="save-btn"
+     "Cascading" means rules combine and more-specific selectors win when they
+     conflict. The HTML attaches these styles via the <link> tag in index.html.
+
+   A FEW RECURRING CONCEPTS, explained once:
+     • THE BOX MODEL: every element is a rectangular box made of, from inside out,
+       content → padding (space inside the border) → border → margin (space
+       outside). Most spacing below is just tuning padding and margin.
+     • FLEXBOX (display: flex): a layout mode for arranging children in a row and
+       distributing space between them — used for the entry title rows below.
+     • PSEUDO-CLASSES (:hover, :focus): style an element in a particular STATE,
+       e.g. ":hover" applies only while the mouse is over it.
+   ========================================================================== */
+
+/* ── 1. Reset & Base ──
+   Browsers apply their own default margins/padding, which differ between browsers.
+   The `*` selector matches EVERY element; zeroing these gives us a clean, identical
+   starting point everywhere. box-sizing: border-box is a popular, sanity-saving
+   choice: it makes an element's `width` include its padding and border, so a box set
+   to width:100% truly spans 100% instead of overflowing once padding is added. */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +46,10 @@ body {
   line-height: 1.6;
 }
 
-/* ── 2. Page Layout ── */
+/* ── 2. Page Layout ──
+   The classic "centered column" pattern: cap the width at 800px so text isn't an
+   uncomfortably long line on wide screens, then `margin: 0 auto` splits the leftover
+   horizontal space equally on both sides — that's what centers the column. */
 main {
   max-width: 800px;
   margin: 0 auto;
@@ -82,7 +118,10 @@ header .subtitle {
   resize: vertical;          /* Resize only vertically */
 }
 
-/* Focus outline in primary green */
+/* Focus outline in primary green.
+   :focus is a pseudo-class that applies only while an input is "active" (the user
+   has clicked into it or tabbed to it). Highlighting the focused field helps people
+   see where their typing will go — an accessibility nicety. */
 #title-input:focus,
 #mood-select:focus,
 #content-input:focus {
@@ -104,6 +143,8 @@ header .subtitle {
   cursor: pointer;
 }
 
+/* :hover applies only while the mouse is over the button. Darkening it slightly on
+   hover is a small visual cue that the button is interactive and clickable. */
 #save-btn:hover {
   background: #3d6b4a;       /* Slightly darker green */
 }
@@ -138,7 +179,11 @@ header .subtitle {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); /* Shadow */
 }
 
-/* Row 1 — Title Row */
+/* Row 1 — Title Row
+   FLEXBOX in action: display:flex lays the two children (the title group and the
+   date) side by side in a row. justify-content: space-between pushes them to
+   opposite ends — title hard-left, date hard-right — with the gap in between.
+   align-items: baseline lines up their text baselines so they sit on the same line. */
 .entry-title-row {
   display: flex;
   justify-content: space-between;

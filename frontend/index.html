@@ -1,32 +1,77 @@
 <!DOCTYPE html>
+<!--
+  ==========================================================================
+  index.html — The page the user actually sees (Study Plan: Stop 6)
+  ==========================================================================
+
+  WHAT IS HTML?
+    HTML (HyperText Markup Language) describes the STRUCTURE of a web page — the
+    boxes, headings, text fields, and buttons — but not how they behave or what
+    they look like. Think of a house: HTML is the framing and rooms, CSS (style.css)
+    is the paint and furniture, and JavaScript (app.js) is the electricity that
+    makes things work when you flip a switch. This file is just the framing.
+
+  HOW IT'S BUILT:
+    HTML is made of "elements" written as tags, like <p>...</p>. Most come in pairs:
+    an opening tag <p> and a closing tag </p>, with content in between. Tags can
+    nest inside each other, forming a tree — that tree is what the browser draws.
+
+  THE MOST IMPORTANT THING TO NOTICE HERE — the id="..." attributes:
+    Several elements below carry an id, e.g. id="title-input". An id is a unique
+    name tag. By itself it does nothing visible. Its purpose is to give JavaScript
+    (Stop 8) a handle to "grab" that exact element later — e.g.
+    document.getElementById("title-input"). So as you read, treat every id as a
+    labeled hook that app.js will reach for. The empty entries section near the
+    bottom is the clearest example: it starts empty and JavaScript fills it in.
+  ==========================================================================
+-->
+<!-- lang="en" tells browsers/screen readers the page is in English. -->
 <html lang="en">
 <head>
+  <!--
+    <head> holds metadata ABOUT the page — information the browser needs but that
+    is NOT drawn on screen. Nothing in here appears in the page body itself.
+  -->
+  <!-- charset=UTF-8 lets the page display any character, including our emoji (📔). -->
   <meta charset="UTF-8" />
+  <!-- The viewport tag makes the layout adapt to the device width (mobile-friendly). -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- The text shown in the browser tab. -->
   <title>My Personal Journal</title>
-  <!-- Link to the stylesheet -->
+  <!-- Pull in our stylesheet. This is how index.html and style.css get connected. -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!--
+    <body> holds everything that IS visible on the page. The browser renders these
+    elements top-to-bottom, in order.
+  -->
 
-  <!-- Page Header -->
+  <!-- Page Header — the title banner at the top. <header> is a semantic tag: it
+       carries no special behavior, it just labels this region as "the header" for
+       clarity and accessibility. -->
   <header>
     <h1>📔 My Personal Journal</h1>
     <p class="subtitle">Your private space to write, reflect, and grow.</p>
   </header>
 
-  <!-- Main Content -->
+  <!-- <main> marks the primary content of the page. -->
   <main>
 
-    <!-- Section 1: New Entry Form -->
+    <!-- ── Section 1: the form for writing a NEW entry ── -->
     <section id="new-entry-section">
       <div class="card form-card">
 
-        <!-- Title input -->
+        <!-- A <label> names an input. The for="title-input" ties this label to the
+             input whose id is "title-input", so clicking the label focuses the box. -->
         <label for="title-input">Title</label>
+        <!-- <input type="text"> is a single-line text box. The placeholder is the
+             greyed-out hint shown when it's empty. app.js reads this box via its id. -->
         <input type="text" id="title-input" placeholder="Give your entry a title..." />
 
-        <!-- Mood dropdown -->
+        <!-- A <select> is a dropdown menu. Each <option> is a choice; the `value` is
+             what JavaScript reads (e.g. "happy"), while the text is what the user sees.
+             `selected` makes Neutral the default highlighted choice. -->
         <label for="mood-select">Mood</label>
         <select id="mood-select">
           <option value="happy">😊 Happy</option>
@@ -34,23 +79,30 @@
           <option value="sad">😢 Sad</option>
         </select>
 
-        <!-- Content textarea -->
+        <!-- <textarea> is a MULTI-line text box, for the longer entry body. -->
         <label for="content-input">What's on your mind?</label>
         <textarea id="content-input" placeholder="Write your journal entry here..."></textarea>
 
-        <!-- Save button -->
+        <!-- The Save button. Note it does NOTHING on its own — clicking it only
+             matters because app.js attaches a "click" listener to this id and runs
+             saveEntry() in response. HTML provides the button; JS gives it behavior. -->
         <button id="save-btn">💾 Save Entry</button>
 
       </div>
     </section>
 
-    <!-- Divider -->
+    <!-- A simple visual divider between the form and the list of past entries. -->
     <div class="section-divider">
       <span>Past Entries</span>
-      <hr />
+      <hr /> <!-- <hr> draws a horizontal rule (a line). -->
     </div>
 
-    <!-- Section 2: Entries List -->
+    <!-- ── Section 2: where saved entries are listed ──
+         This section is INTENTIONALLY EMPTY in the HTML. When the page loads,
+         app.js calls the backend, gets the entries, builds a card for each one, and
+         injects them in here. If there are none, it injects an "empty state" message
+         instead. This is the clearest example of HTML providing a container that
+         JavaScript fills at runtime. -->
     <section id="entries-section">
       <!-- Entry cards will be injected here by app.js -->
       <!-- OR the empty state message if no entries -->
@@ -58,7 +110,12 @@
 
   </main>
 
-  <!-- Link to app.js at the bottom -->
+  <!--
+    Load app.js LAST, at the very bottom of <body>, on purpose. A script can only
+    grab elements (by id) that already exist when it runs. By placing it here, all
+    the inputs and sections above are guaranteed to exist by the time the script
+    executes, so document.getElementById(...) in app.js always finds them.
+  -->
   <script src="app.js"></script>
 
 </body>
